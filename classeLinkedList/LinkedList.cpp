@@ -59,6 +59,38 @@ bool LinkedList::insertTail(int data) {
         pAux->setPtrNext(pNew);
         return true;
     }
-    
-
 }
+
+bool LinkedList::removeElement(int data) {
+    if (!isEmpty()) {
+        Node* ptrCancel;
+        if (data == head->getInfo()) {
+            ptrCancel = head;
+            head = head->getPtrNext();
+            delete ptrCancel;
+            return true;
+        } else {
+            Node* pCurrent = head;
+            ptrCancel = head->getPtrNext();
+
+            while (ptrCancel->getPtrNext() != nullptr && ptrCancel->getInfo() != data) {
+                ptrCancel = ptrCancel->getPtrNext();
+                pCurrent = pCurrent->getPtrNext();
+            }
+
+            if (ptrCancel != nullptr) {
+                pCurrent->setPtrNext(ptrCancel->getPtrNext());
+                delete ptrCancel;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return false;
+}
+
+
+
+
+
