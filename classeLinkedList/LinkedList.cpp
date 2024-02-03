@@ -8,11 +8,21 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
-
+    Node* pAux = head;
+    while (pAux != nullptr) {
+        head = head->getPtrNext();
+        delete pAux;
+        pAux = head;
+    }
 }
 
 LinkedList::LinkedList(const LinkedList& lista) {
-
+    head = nullptr;
+    Node* pAux = lista.head;
+    while (pAux != nullptr) {
+        insertTail(pAux->getInfo());
+        pAux = pAux->getPtrNext();
+    }
 }
 
 bool LinkedList::isEmpty() {
@@ -89,8 +99,17 @@ bool LinkedList::removeElement(int data) {
     }
     return false;
 }
+void LinkedList::displayHelper() {
+    displayRec(head);
+}
 
+void LinkedList::displayRec(Node* head) {
+    if (head != nullptr) {
+        cout << endl << " " << head->getInfo();
+        displayRec(head->getPtrNext());
+    }
+}
 
-
-
-
+/*Node* LinkedList::getHead() {
+    return head;
+}*/
