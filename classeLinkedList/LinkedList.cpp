@@ -42,7 +42,7 @@ void LinkedList::display() {
     }
 }
 
-bool LinkedList::insertHead(int data) {
+bool LinkedList::insertHead(int element) {
     Node* pNew = new Node(data, head);
     if (!pNew) { 
         return false;
@@ -52,7 +52,7 @@ bool LinkedList::insertHead(int data) {
     return true;
 }
 
-bool LinkedList::insertTail(int data) {
+bool LinkedList::insertTail(int element) {
     Node* pNew = new Node(data);
 
     if (!pNew) {
@@ -71,10 +71,10 @@ bool LinkedList::insertTail(int data) {
     }
 }
 
-bool LinkedList::removeElement(int data) {
+bool LinkedList::removeElement(int element) {
     if (!isEmpty()) {
         Node* ptrCancel;
-        if (data == head->getInfo()) {
+        if (element == head->getInfo()) {
             ptrCancel = head;
             head = head->getPtrNext();
             delete ptrCancel;
@@ -83,7 +83,7 @@ bool LinkedList::removeElement(int data) {
             Node* pCurrent = head;
             ptrCancel = head->getPtrNext();
 
-            while (ptrCancel->getPtrNext() != nullptr && ptrCancel->getInfo() != data) {
+            while (ptrCancel->getPtrNext() != nullptr && ptrCancel->getInfo() != element) {
                 ptrCancel = ptrCancel->getPtrNext();
                 pCurrent = pCurrent->getPtrNext();
             }
@@ -113,3 +113,115 @@ void LinkedList::displayRec(Node* head) {
 /*Node* LinkedList::getHead() {
     return head;
 }*/
+
+Node* LinkedList::search(int element) {
+    Node* pAux = head;
+    while (!pAux && pAux->getInfo() != element) {
+        pAux = pAux->getPtrNext();
+    }
+    
+    return pAux;
+}
+
+float LinkedList::avg() {
+    Node* pAux = head;
+    float avg = 0;
+    int i = 0;
+
+    while (!pAux) {
+        pAux = pAux->getPtrNext();
+        avg += pAux->getInfo();
+        i++;
+    }
+
+    return (avg / i);
+}
+
+int LinkedList::counter() {
+    Node* pAux = head;
+    int i = 0;
+    while (!pAux) {
+        pAux = pAux->getPtrNext();
+        i++;
+    }
+    return i;
+}
+
+int LinkedList::max() {
+    Node* pAux;
+    int max;
+    
+    if (!pAux) {
+        max = pAux->getInfo();
+        pAux = pAux->getPtrNext();
+    }
+
+    while (!pAux) {
+        if (pAux->getInfo() > max) {
+            max = pAux->getInfo();
+        }
+        pAux = pAux->getPtrNext();
+    }
+
+    return max;
+}
+
+int LinkedList::sumEven() {
+    Node* pAux = head;
+    int sum = 0;
+
+    while (!pAux) {
+        if (pAux->getInfo() % 2 == 0) {
+            sum += pAux->getInfo();
+        }
+        pAux = pAux->getPtrNext();
+    }
+    return sum;
+}
+
+int LinkedList::sumOdd() {
+    Node* pAux = head;
+    int sum = 0;
+
+    while (!pAux) {
+        if (pAux->getInfo() % 2 != 0) {
+            sum += pAux->getInfo();
+        }
+        pAux = pAux->getPtrNext();
+    }
+    return sum;
+}
+
+LinkedList& LinkedList::sqList(int element) {
+    LinkedList temp;
+    Node* pAux = head;
+
+    while (!pAux) {
+        temp.insertTail(pow(pAux->getInfo(), 2));
+        pAux = pAux->getPtrNext();
+    }
+
+    return temp;
+}
+
+bool LinkedList::removeEvenHead() {
+    Node* ptrCancel;
+    if (!head && head->getInfo() % 2 == 0) {
+        ptrCancel = head;
+        head = head->getPtrNext();
+        delete ptrCancel;
+        return true;
+    }
+    return false;
+}
+
+void LinkedList::multiplyNeg() {
+    Node* pAux = head;
+
+    while (!pAux) {
+        if (pAux->getInfo() < 0) {
+            pAux->setInfo(pAux->getInfo() * -1);
+        }
+        pAux = pAux->getPtrNext();
+    }
+}
