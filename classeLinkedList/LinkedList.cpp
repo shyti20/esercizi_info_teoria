@@ -43,7 +43,7 @@ void LinkedList::display() {
 }
 
 bool LinkedList::insertHead(int element) {
-    Node* pNew = new Node(data, head);
+    Node* pNew = new Node(element, head);
     if (!pNew) { 
         return false;
     }
@@ -53,7 +53,7 @@ bool LinkedList::insertHead(int element) {
 }
 
 bool LinkedList::insertTail(int element) {
-    Node* pNew = new Node(data);
+    Node* pNew = new Node(element);
 
     if (!pNew) {
         return false;
