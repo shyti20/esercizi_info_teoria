@@ -13,7 +13,6 @@ class LinkedList {
         LinkedList(int info);
         LinkedList(const LinkedList& lkList);
         ~LinkedList();
-        //Node* getHead();
         bool insertHead(int element);
         bool insertTail(int element);
         void display();
