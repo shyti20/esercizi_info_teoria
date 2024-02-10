@@ -8,6 +8,7 @@ class LinkedList {
     private:
         Node* head; //puntatore al nodo testa della lista
         void displayRec(Node* head);
+        void swap(Node* a, Node* b);
     public:
         LinkedList();
         LinkedList(int info);
@@ -28,6 +29,7 @@ class LinkedList {
         LinkedList& sqList(int element);
         bool removeEvenHead();
         void multiplyNeg();
-        bool sort();
+        void sort();
+    friend istream& operator>>(istream& in, LinkedList& newList);
 };
 #endif

@@ -110,10 +110,6 @@ void LinkedList::displayRec(Node* head) {
     }
 }
 
-/*Node* LinkedList::getHead() {
-    return head;
-}*/
-
 Node* LinkedList::search(int element) {
     Node* pAux = head;
     while (!pAux && pAux->getInfo() != element) {
@@ -224,4 +220,41 @@ void LinkedList::multiplyNeg() {
         }
         pAux = pAux->getPtrNext();
     }
+}
+
+void LinkedList::sort() {
+    Node* ptrI = head, *ptrJ;
+
+    if (!head) {
+        while (!ptrI->getPtrNext()) {
+            ptrJ = ptrI->getPtrNext();
+            while (!ptrJ) {
+                ptrJ = ptrJ->getPtrNext();
+                if (ptrI->getInfo() > ptrJ->getInfo()) {
+                    swap(ptrI, ptrJ);
+                }
+            }
+            ptrI = ptrI->getPtrNext();
+        }
+    }
+    
+}
+
+void LinkedList::swap(Node* a, Node* b) {
+    int temp = a->getInfo();
+
+    a->setInfo(b->getInfo());
+    b->setInfo(temp);  
+}
+
+istream& operator>>(istream& in, LinkedList& newList) {
+    int n, value;
+    in >> n;
+
+    for (int i = 0; i < n; i++) {
+        in >> value;
+        if (newList.insertTail(value)) 
+            cout << endl << "Allocazione fallita";
+    }
+    return in;
 }
