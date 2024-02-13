@@ -30,6 +30,8 @@ class LinkedList {
         bool removeEvenHead();
         void multiplyNeg();
         void sort();
+        LinkedList& operator+(LinkedList& newList);
     friend istream& operator>>(istream& in, LinkedList& newList);
+    friend LinkedList merge(const LinkedList& firstList, const LinkedList& secondList);
 };
 #endif

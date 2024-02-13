@@ -247,14 +247,63 @@ void LinkedList::swap(Node* a, Node* b) {
     b->setInfo(temp);  
 }
 
+LinkedList& LinkedList::operator+(LinkedList& newList) {
+    Node* pAux = head;
+
+    if (!head) {
+    while (pAux->getPtrNext()) {
+            pAux = pAux->getPtrNext();
+        }
+
+        pAux->setPtrNext(newList.head);
+    } else {
+        head = newList.head;
+    }
+    newList.head = nullptr;
+    return *this;
+}
+
 istream& operator>>(istream& in, LinkedList& newList) {
     int n, value;
     in >> n;
 
     for (int i = 0; i < n; i++) {
         in >> value;
-        if (newList.insertTail(value)) 
+        if (!newList.insertTail(value)) 
             cout << endl << "Allocazione fallita";
     }
     return in;
+}
+
+LinkedList merge(const LinkedList& firstList, const LinkedList& secondList) {
+    LinkedList fusione;
+
+    firstList.sort();
+    secondList.sort();
+
+    Node* pi, pj;
+    pi = firstList.head;
+    pj = secondList.head;
+
+    while (pi != nullptr && pj != nullptr) {
+        if (pi->getInfo() < pj->getInfo()) {
+            fusione.insertTail(pi->getInfo());
+            pi = pi->getPtrNext();
+        } else {
+            fusione.insertTail(pj->getInfo());
+            pj = pj->getPtrNext();
+        }
+    }
+
+    while (pi != nullptr) {
+        fusione.insertTail(pi->getInfo());
+        pi = pi->getPtrNext();
+    }
+
+    while (pj != nullptr) {
+        fusione.insertTail(pj->getInfo());
+        pj = pj->getPtrNext();
+    }
+
+    return fusione;
 }
