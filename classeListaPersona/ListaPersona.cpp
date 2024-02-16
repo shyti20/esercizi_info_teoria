@@ -34,8 +34,7 @@ bool ListaPersona::insertHead(Persona data) {
 }
 bool ListaPersona::insertTail(Persona data) {
     Node* pNew = new Node(data);
-    Node* pAux;
-    if (!pAux) return false;
+    Node* pAux = head;
     if (isEmpty()) {
         head = pNew;
     } else {
