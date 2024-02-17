@@ -6,11 +6,12 @@ Playlist::Playlist() {
 
 Playlist::~Playlist() {
     Node* pAux = head;
-    while (pAux) {
+    while (!pAux) {
         head = head->getPtrNext();
         delete pAux;
         pAux = head;
     }
+    head = nullptr;
 }
 
 Playlist::Playlist(const Playlist& newPlalist) {
@@ -46,7 +47,7 @@ Node* Playlist::ricercaBrano(string t) {
     return pAux;
 }
 
-Brano& Playlist::maxDurata() {
+Brano Playlist::maxDurata() {
     Node* pAux = head;
     Brano max;
 
@@ -74,7 +75,7 @@ void Playlist::ascolta() {
 istream& operator>>(istream& in, Playlist& newPlaylist) {
     int n;
     Brano newBrano;
-
+    newPlaylist.clear();
     in >> n;
 
     for (int i = 0; i < n; i++) {
@@ -103,7 +104,7 @@ void Playlist::prossBrano() {
     cout << head;
 }
 
-Brano& Playlist::operator-(string t) {
+Brano Playlist::operator-(string t) {
     Node* ptrCancel = ricercaBrano(t);
     Node* pAux = head;
 
@@ -145,4 +146,13 @@ Playlist& Playlist::operator+(Brano& newBrano) {
     !(*this);
 
     return *this;
+}
+
+void Playlist::clear() {
+    Node* pAux = head;
+    while (pAux) {
+        head = head->getPtrNext();
+        delete pAux;
+        pAux = head;
+    }
 }
