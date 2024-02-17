@@ -35,17 +35,11 @@ void Playlist::insertTail(Brano& newBrano) {
     }
 }
 
-Node* Playlist::ricercaBrano() {
-    string title;
-
-    do {
-        cout << endl << "Inserisci il brano da ricercare: ";
-        cin >> title;
-    } while (title != "");
+Node* Playlist::ricercaBrano(string t) {
 
     Node* pAux = head;
 
-    while (!pAux && pAux->getBrano().getTitolo() != title) {
+    while (!pAux && pAux->getBrano().getTitolo() != t) {
         pAux = pAux->getPtrNext();
     }
 
@@ -54,12 +48,11 @@ Node* Playlist::ricercaBrano() {
 
 Brano& Playlist::maxDurata() {
     Node* pAux = head;
-    Brano max = head->getBrano();
+    Brano max;
 
     while (!pAux) {
         if (max.getDurata() < pAux->getBrano().getDurata()) {
             max = pAux->getBrano();
-            pAux = pAux->getPtrNext();
         }
         pAux = pAux->getPtrNext();
     }
@@ -67,7 +60,7 @@ Brano& Playlist::maxDurata() {
     return max;
 }
 
-void Playlist::prossBrano() {
+void Playlist::ascolta() {
     if (!head) {
         Node* ptrCancel;
         ptrCancel = head;
@@ -104,4 +97,52 @@ ostream& operator<<(ostream& out, Playlist& newPlaylist) {
     }
 
     return out;
+}
+
+void Playlist::prossBrano() {
+    cout << head;
+}
+
+Brano& Playlist::operator-(string t) {
+    Node* ptrCancel = ricercaBrano(t);
+    Node* pAux = head;
+
+    while (pAux->getPtrNext() != ptrCancel) {
+        pAux = pAux->getPtrNext();
+    }
+
+    pAux->setPtrNext(ptrCancel->getPtrNext());
+    Brano temp = ptrCancel->getBrano();
+    delete ptrCancel;
+    return temp;
+}
+
+void Playlist::operator!() {
+    Node* pi = head, *pj;
+
+    while (!pi->getPtrNext()) {
+        pj = pi->getPtrNext();
+        while (!pj) {
+            if (pi->getBrano().getPunt() > pj->getBrano().getPunt()) {
+                swap(pi, pj); 
+            }
+            pj = pj->getPtrNext();
+        }
+        pi = pi->getPtrNext();
+    }
+}
+
+void swap(Node* a, Node* b) {
+    Brano temp;
+
+    temp = a->getBrano();
+    a->setBrano(b->getBrano());
+    b->setBrano(temp);
+}
+
+Playlist& Playlist::operator+(Brano& newBrano) {
+    insertTail(newBrano);
+    !(*this);
+
+    return *this;
 }

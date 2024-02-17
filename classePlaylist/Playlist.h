@@ -12,11 +12,13 @@ class Playlist {
         ~Playlist();
         Playlist(const Playlist& newPlaylist);
         void insertTail(Brano& newBrano);
-        Node* ricercaBrano();
+        Node* ricercaBrano(string t);
         Brano& maxDurata();
-        Brano& operator-(string t); // manca
-        void operator!(); // manca
-        void operator+(Brano& newBrano); // manca
+        Brano& operator-(string t);
+        void operator!();
+        void swap(Node* a, Node* b);
+        Playlist& operator+(Brano& newBrano);
+        void ascolta();
         void prossBrano();
     friend ostream& operator<<(ostream& out, Playlist& newPlaylist);
     friend istream& operator>>(istream& in, Playlist& newPlaylist);
