@@ -1,5 +1,6 @@
 #ifndef ORARIOLAVORO_H
 #define ORARIOLAVORO_H
+
 #include "Node.h"
 
 class OrarioLavoro {
@@ -9,12 +10,14 @@ class OrarioLavoro {
         OrarioLavoro();
         OrarioLavoro(const OrarioLavoro newOrario);
         ~OrarioLavoro();
-        void insertTail(Dipendente newDip);
-        void insertHead(Dipendente newDip);
+        bool insertTail(Dipendente newDip);
+        bool insertHead(Dipendente newDip);
         void cronologia();
         void stampaFascia();
-        Ora ricerca();
-        void insertEqNext(Dipendente newDip);
-        void insertNew(Dipendente newDip);
+        Ora ricerca(Dipendente temp);
+        bool insertEqNext(Dipendente newDip);
+        bool nextEquals(Dipendente newDip);
+        bool  insertNew();
+        bool isEmpty();
 };
 #endif

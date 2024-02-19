@@ -61,6 +61,7 @@ bool LinkedList::insertTail(int element) {
 
     if (isEmpty()) {
         head = pNew;
+        return true;
     } else {
         Node* pAux = head;
         while (pAux->getPtrNext() != nullptr) {
