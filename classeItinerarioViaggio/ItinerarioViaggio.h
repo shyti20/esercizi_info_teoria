@@ -1,7 +1,7 @@
 #ifndef ITINERARIOVIAGGIO_H
 #define ITINERARIOVIAGGIO_H
 
-#include "Node.h"I
+#include "Node.h"
 
 class ItinerarioViaggio {
     private:
@@ -12,6 +12,7 @@ class ItinerarioViaggio {
         ItinerarioViaggio(const ItinerarioViaggio& ite);
         ~ItinerarioViaggio();
         bool insertHead(Tappa newTappa);
+        bool insertTail(Tappa newTappa);
         void prossTappa();
         bool removeTappa();
         ItinerarioViaggio& operator-(string n);

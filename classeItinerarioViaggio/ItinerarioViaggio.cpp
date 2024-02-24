@@ -38,12 +38,31 @@ bool ItinerarioViaggio::insertHead(Tappa newTappa) {
     return true;
 }
 
+bool ItinerarioViaggio::insertTail(Tappa newTappa) {
+    Node* pNew = new Node(newTappa);
+
+    if (pNew) {
+        if (head) {
+            head = pNew;
+        } else {
+            Node* pAux = head;
+
+            while (pAux->getPtrNext()) {
+                pAux = pAux->getPtrNext();
+            }
+            pAux->setPtrNext(pNew);
+        }
+        return true;
+    }
+    return false;
+}
+
 void ItinerarioViaggio::prossTappa() {
     cout << endl << head->getTappa();
 }
 
 bool ItinerarioViaggio::removeTappa() {
-    if (!head) {
+    if (head) {
         Node* ptrCancel = head;
         head = head->getPtrNext();
         delete ptrCancel;
