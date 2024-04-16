@@ -45,6 +45,7 @@ bool Queue::insert(int info, int priority) {
         rear = pNew;
     }
     rear->setPtrNext(front);
+    return true;
 }
 
 bool Queue::remove(int info, int priority) {
