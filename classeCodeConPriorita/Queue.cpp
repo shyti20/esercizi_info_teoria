@@ -28,7 +28,7 @@ Queue::~Queue() {
     while (front != rear) {
         front = front->getPtrNext();
         delete pDel;
-        pDel = pDel;
+        pDel = front;
     }
 }
 
