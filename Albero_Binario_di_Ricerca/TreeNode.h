@@ -11,7 +11,9 @@ class TreeNode {
         TreeNode(int i);
         TreeNode(int i, TreeNode* sx, TreeNode* dx);
         TreeNode* getLeft();
+        TreeNode** getPtrLeft();
         TreeNode* getRight();
+        TreeNode** getPtrRight();
         int getInfo();
         void setLeft(TreeNode* sx);
         void setRight(TreeNode* dx);

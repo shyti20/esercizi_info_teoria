@@ -42,3 +42,11 @@ void TreeNode::setTreeNode(int i, TreeNode* sx, TreeNode* dx) {
     right = dx;
 }
 
+TreeNode** TreeNode::getPtrLeft() {
+    return &left;
+}
+
+TreeNode** TreeNode::getPtrRight() {
+    return &right;
+}
+
