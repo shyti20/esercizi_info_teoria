@@ -4,6 +4,18 @@ Bst::Bst() {
     root = nullptr;
 }
 
+Bst::~Bst() {
+    BstPrivate(root);
+}
+
+void Bst::BstPrivate(TreeNode* root) {
+    if (root) {
+        BstPrivate(root->getLeft());
+        BstPrivate(root->getPtrRight());
+        delete root;
+    }
+}
+
 // forma ricorsiva
 void Bst::preorderWalk(TreeNode* root) {
     if (root) {
@@ -31,6 +43,30 @@ void Bst::insert(TreeNode** root, int x) {
 
 void Bst::insertHelper(int x) {
     insert(&root, x);
+}
+
+void Bst::postorderWalk(TreeNode* root) {
+    if (root) {
+        postorderWalk(root->getLeft());
+        postorderWalk(root->getRight());
+        cout << endl << "Info: " << root->getInfo();
+    }
+}
+
+void Bst::postorderHelper() {
+    postorderWalk(root);
+}
+
+void Bst::simmetricorderWalk(TreeNode* root) {
+    if (root) {
+        simmetricWalk(root->getLeft());
+        cout << endl << "Info: " << root->getInfo();
+        simmetricWalk(root->getRight());
+    }
+}
+
+void Bst::simmetricorderHelper() {
+    inordertraversalWalk(root);
 }
 
 TreeNode* Bst::search(TreeNode* root, int x) {
@@ -74,3 +110,30 @@ int Bst::min(TreeNode* root) {
 int Bst::minHelper() {
     return min(root);
 }
+
+int Bst::contTreeNode(TreeNode* root, int i) {
+    if (root) {
+        i = contTreeNode(root->getLeft(), i);
+        i = contTreeNode(root->getRight(), i);
+        return ++i;
+    }
+    return i;
+}
+
+int Bst::contTreeNodeHelper() {
+    return contTreeNode(root, 0);
+}
+
+int Bst::simmetricorderSum(TreeNode* root, int sum) {
+    if (root) {
+        sum = simmetricorderSum(root->getLeft(), sum);
+        sum += root->getInfo();
+        sum = simmetricorderSum(root->getRight(), sum);
+    }
+    return sum;
+}
+
+int Bst::simmetricorderSumHelper() {
+    return simmetricorderSum(root, 0);
+}
+
