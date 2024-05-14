@@ -5,14 +5,15 @@ Bst::Bst() {
 }
 
 Bst::~Bst() {
-    BstPrivate(root);
+    removeAll(&root);
 }
 
-void Bst::BstPrivate(TreeNode* root) {
-    if (root) {
-        BstPrivate(root->getLeft());
-        BstPrivate(root->getPtrRight());
-        delete root;
+void Bst::removeAll(TreeNode** root) {
+    if (*root) {
+        removeAll((*root)->getLeft());
+        removeAll((*root)->getPtrRight());
+        delete *root;
+        root = nullptr;
     }
 }
 
@@ -121,16 +122,14 @@ int Bst::contTreeNode(TreeNode* root, int i) {
 }
 
 int Bst::contTreeNodeHelper() {
-    return contTreeNode(root, 0);
+    return contTreeNode(root);
 }
 
-int Bst::simmetricorderSum(TreeNode* root, int sum) {
+int Bst::simmetricorderSum(TreeNode* root) {
     if (root) {
-        sum = simmetricorderSum(root->getLeft(), sum);
-        sum += root->getInfo();
-        sum = simmetricorderSum(root->getRight(), sum);
+        return simmetricorderSum(root->getLeft()) + root->getInfo() + simmetricorderSum(root->getRight());
     }
-    return sum;
+    return 0;
 }
 
 int Bst::simmetricorderSumHelper() {

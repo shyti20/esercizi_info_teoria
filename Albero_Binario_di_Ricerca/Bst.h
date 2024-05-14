@@ -12,14 +12,13 @@ class Bst {
         void preorderWalk(TreeNode* root);
         void postorderWalk(TreeNode* root);
         void simmetricorderWalk(TreeNode* root); ///
-        void BstPrivate(TreeNode* root);
+        void removeAll(TreeNode** root);
         void insert(TreeNode** root, int x);
         TreeNode* search(TreeNode* root, int x);
         int contTreeNode(TreeNode* root, int i);
-        int simmetricorderSum(TreeNode* root, int sum);
+        int simmetricorderSum(TreeNode* root);
         int max(TreeNode* root);
         int min(TreeNode* root);
-
     public:
         Bst();
         ~Bst();
